@@ -42,3 +42,5 @@ export interface BeeSoftTheme {
 }
 
 export type TypeOrArray<T> = T | Array<T>;
+export type JsonDataItem = Record<string, unknown>;
+export type JsonData = Array<JsonDataItem>;
