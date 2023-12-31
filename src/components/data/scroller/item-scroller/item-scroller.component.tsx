@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { ItemScrollerProps } from './item-scroller.props.ts';
 
 const ItemScroller = ({
@@ -8,6 +9,8 @@ const ItemScroller = ({
   styles,
   className,
   children,
-}: ItemScrollerProps) => {};
+}: ItemScrollerProps) => {
+  const [renderPages, setRenderPages] = useState();
+};
 
 export { ItemScroller };
