@@ -29,6 +29,8 @@ export interface BeeSoftTheme {
   gray3?: string;
   gray4?: string;
   gray5?: string;
+  black?: string;
+  white?: string;
   monoDark1?: string;
   monoDark2?: string;
   monoDark3?: string;

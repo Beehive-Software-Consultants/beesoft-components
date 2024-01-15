@@ -6,6 +6,7 @@ import { getBrowserLanguage } from '../../common-functions';
 import { TypeOrArray } from '../../common-interfaces.ts';
 import TemplateOutlet, { TemplateFunction } from '../../common/template-outlet/template-outlet.component';
 import { Calendar2LineIcon, CloseLineIcon } from '../../icons.ts';
+import { MediaQuery } from '../../mobile/media-query/media-query.component.tsx';
 import { MobileOverlayPanel } from '../../mobile/overlay/mobile-overlay-panel.component.tsx';
 import OverlayPanel from '../../overlay/overlay-panel/overlay-panel.component';
 import { FormInputControl } from '../form-control.interface';
@@ -29,7 +30,6 @@ import {
 import DateTimeYearSelector from './date-time-year-selector.component';
 import reducer, { DateTimeActionType, DateTimeState } from './date-time.reducer';
 import useGetDateTimeFormat from './hooks/get-date-time-format.hook';
-import { useMediaQuery } from '@react-hook/media-query';
 
 export interface DateTimeProps extends FormInputControl<string | TypeOrArray<Date>, TypeOrArray<Date>> {
   useDefaultDateValue?: boolean;
@@ -106,8 +106,6 @@ const DateTime = ({
   const dropDownTargetRef = useRef<HTMLElement>();
 
   const [inputFormat, use24HourTime] = useGetDateTimeFormat(dateSelection, localeCode);
-
-  const isMobile = useMediaQuery('not all and (min-width: 640px)');
 
   const contextProps = useRef<DateTimeContextProps>({
     calendarTemplate,
@@ -561,70 +559,73 @@ const DateTime = ({
     <DateTimeContext.Provider value={contextProps.current}>
       <div className="bc-date-time">
         {label && <label className="bc-dt-label dark:bsc-text-mono-light-1">{label}</label>}
-        {!isMobile ? (
-          <>
-            <TemplateOutlet props={inputTemplateProps} template={template}>
-              {useFormattedInput === false ? (
-                <ContentEditableInput
-                  value={getValue()}
-                  readOnly={readOnly}
-                  className={inputStyles}
-                  onFocus={onFocus}
-                  onBlur={onBlur}
-                  onInput={onInput}
-                  onElementCreate={(element) => onInputElementCreated(element, false)}
-                  {...inputProps}
-                />
-              ) : (
-                <FormattedInput
-                  value={getValue()}
-                  readOnly={readOnly}
-                  className={inputStyles}
-                  format={inputFormat}
-                  isInputValid={isValidFormatString}
-                  onFocus={onFocus}
-                  onBlur={onBlur}
-                  onChange={onFormatStringChange}
-                  onElementCreate={(element) => onInputElementCreated(element, true)}
-                  {...inputProps}
-                />
-              )}
-            </TemplateOutlet>
-            <OverlayPanel
-              visible={selectorOpen}
-              target={dropDownTarget}
-              shouldTargetCloseOverlay={false}
-              shouldScrollCloseOverlay={true}
-              shouldCheckZIndex={true}
-              shouldRemainOnScreen={true}
-              hidden={onDateTimeHidden}
-              isClickedWithin={onCalendarClick}
-              unmountWhenHidden={true}
-            >
-              {renderSelector()}
-            </OverlayPanel>
-          </>
-        ) : (
-          <>
-            <ContentEditableInput
-              value={getValue()}
-              readOnly={readOnly}
-              inputMode="none"
-              className={inputStyles}
-              onFocus={onFocus}
-              onElementCreate={(element) => onInputElementCreated(element, false)}
-              {...inputProps}
-            />
-            <MobileOverlayPanel
-              visible={selectorOpen}
-              target={dropDownTarget}
-              hidden={onDateTimeHidden}
-              unmountWhenHidden={true}
-            >
-              {renderSelector()}
-            </MobileOverlayPanel>
-          </>
-        )}
+        <MediaQuery
+          mobileMarkup={
+            <>
+              <ContentEditableInput
+                value={getValue()}
+                readOnly={readOnly}
+                inputMode="none"
+                className={inputStyles}
+                onFocus={onFocus}
+                onElementCreate={(element) => onInputElementCreated(element, false)}
+                {...inputProps}
+              />
+              <MobileOverlayPanel
+                visible={selectorOpen}
+                target={dropDownTarget}
+                hidden={onDateTimeHidden}
+                unmountWhenHidden={true}
+              >
+                {renderSelector()}
+              </MobileOverlayPanel>
+            </>
+          }
+          aboveMobileMarkup={
+            <>
+              <TemplateOutlet props={inputTemplateProps} template={template}>
+                {useFormattedInput === false ? (
+                  <ContentEditableInput
+                    value={getValue()}
+                    readOnly={readOnly}
+                    className={inputStyles}
+                    onFocus={onFocus}
+                    onBlur={onBlur}
+                    onInput={onInput}
+                    onElementCreate={(element) => onInputElementCreated(element, false)}
+                    {...inputProps}
+                  />
+                ) : (
+                  <FormattedInput
+                    value={getValue()}
+                    readOnly={readOnly}
+                    className={inputStyles}
+                    format={inputFormat}
+                    isInputValid={isValidFormatString}
+                    onFocus={onFocus}
+                    onBlur={onBlur}
+                    onChange={onFormatStringChange}
+                    onElementCreate={(element) => onInputElementCreated(element, true)}
+                    {...inputProps}
+                  />
+                )}
+              </TemplateOutlet>
+              <OverlayPanel
+                visible={selectorOpen}
+                target={dropDownTarget}
+                shouldTargetCloseOverlay={false}
+                shouldScrollCloseOverlay={true}
+                shouldCheckZIndex={true}
+                shouldRemainOnScreen={true}
+                hidden={onDateTimeHidden}
+                isClickedWithin={onCalendarClick}
+                unmountWhenHidden={true}
+              >
+                {renderSelector()}
+              </OverlayPanel>
+            </>
+          }
+        />
       </div>
     </DateTimeContext.Provider>
   );

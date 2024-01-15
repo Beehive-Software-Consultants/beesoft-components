@@ -1,6 +1,7 @@
 import { addMonths, subMonths } from 'date-fns';
 import { Dispatch } from 'react';
 import { TypeOrArray } from '../../common-interfaces.ts';
+import { MediaQuery } from '../../mobile/media-query/media-query.component.tsx';
 import DateTimeCalendar from './date-time-calendar.component';
 import DateTimeScroller from './date-time-scroller.component';
 import { CalendarSelectionMode, DateScrollerType } from './date-time-types';
@@ -24,7 +25,7 @@ const DateTimeRangeSelector = ({
   onChange,
   dispatcher,
 }: DateTimeRangeSelectorProps) => {
-  const isMobile = useMediaQuery('not all and (min-width: 640px)');
+  const isMobile = useMediaQuery('screen and (max-device-width: 40rem)');
 
   const nextMonth = addMonths(viewDate, 1);
 
@@ -79,8 +80,8 @@ const DateTimeRangeSelector = ({
   };
 
   return (
-    <div className="bsc-flex bsc-flex-col bc-dt-range-selector">
-      <div className="bsc-flex-shrink bc-dt-range-scroller-wrapper">
+    <div className="bc-dt-range-selector bsc-flex bsc-flex-col">
+      <div className="bc-dt-range-scroller-wrapper bsc-flex-shrink">
         <DateTimeScroller
           title={getSelectorTitle()}
           scrollerType={DateScrollerType.Range}
@@ -90,9 +91,9 @@ const DateTimeRangeSelector = ({
         />
       </div>
       <div className="bsc-flex-grow">
-        {!isMobile ? (
-          <div className="bsc-flex bsc-flex-row bsc-py-1 bsc-px-2 bc-dt-range-wrapper">
-            <div className="bsc-border-r bsc-border-solid bsc-border-gray-3 bsc-pr-4 bc-dt-range-calendar-1">
+        <MediaQuery
+          mobileMarkup={
+            <div className="bc-dt-range-calendar bsc-px-2 bsc-py-1">
               <DateTimeCalendar
                 viewDate={viewDate}
                 selectedStartDate={selectedStartDate}
@@ -103,31 +104,34 @@ const DateTimeRangeSelector = ({
                 dispatcher={dispatcher}
               />
             </div>
-            <div className="bsc-pl-4 bc-dt-range-calendar-2">
-              <DateTimeCalendar
-                viewDate={nextMonth}
-                selectedStartDate={selectedStartDate}
-                selectedEndDate={selectedEndDate}
-                selectionMode={CalendarSelectionMode.Range}
-                onDateSelected={onDateSelected}
-                locale={locale}
-                dispatcher={dispatcher}
-              />
+          }
+          aboveMobileMarkup={
+            <div className="bc-dt-range-wrapper bsc-flex bsc-flex-row bsc-px-2 bsc-py-1">
+              <div className="bc-dt-range-calendar-1 bsc-border-r bsc-border-solid bsc-border-gray-3 bsc-pr-4">
+                <DateTimeCalendar
+                  viewDate={viewDate}
+                  selectedStartDate={selectedStartDate}
+                  selectedEndDate={selectedEndDate}
+                  selectionMode={CalendarSelectionMode.Range}
+                  onDateSelected={onDateSelected}
+                  locale={locale}
+                  dispatcher={dispatcher}
+                />
+              </div>
+              <div className="bc-dt-range-calendar-2 bsc-pl-4">
+                <DateTimeCalendar
+                  viewDate={nextMonth}
+                  selectedStartDate={selectedStartDate}
+                  selectedEndDate={selectedEndDate}
+                  selectionMode={CalendarSelectionMode.Range}
+                  onDateSelected={onDateSelected}
+                  locale={locale}
+                  dispatcher={dispatcher}
+                />
+              </div>
             </div>
-          </div>
-        ) : (
-          <div className="bsc-py-1 bsc-px-2 bc-dt-range-calendar">
-            <DateTimeCalendar
-              viewDate={viewDate}
-              selectedStartDate={selectedStartDate}
-              selectedEndDate={selectedEndDate}
-              selectionMode={CalendarSelectionMode.Range}
-              onDateSelected={onDateSelected}
-              locale={locale}
-              dispatcher={dispatcher}
-            />
-          </div>
-        )}
+          }
+        />
       </div>
     </div>
   );

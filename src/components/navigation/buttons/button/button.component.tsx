@@ -34,6 +34,7 @@ const ButtonComponent = (props: ButtonProps, ref: Ref<ButtonRef>) => {
       'bsc-w-full': fullWidth,
       'bsc-bg-gray-3 bsc-text-gray-2': disabled,
       'bsc-bg-primary-1 bsc-text-white hover:bsc-bg-primary-2': buttonType === 'primary',
+      'bsc-bg-primary-2 bsc-text-white hover:bsc-bg-primary-3': buttonType === 'secondary',
       'bsc-bg-info bsc-text-white': buttonType === 'info',
       'bsc-bg-success bsc-text-white': buttonType === 'success',
       'bsc-bg-warning bsc-text-white': buttonType === 'warning',

@@ -1,6 +1,6 @@
 import { ButtonHTMLAttributes } from 'react';
 
-export type ButtonType = 'primary' | 'info' | 'success' | 'warning' | 'error';
+export type ButtonType = 'primary' | 'secondary' | 'info' | 'success' | 'warning' | 'error';
 
 export interface ButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'onClick'> {
   buttonType?: ButtonType;

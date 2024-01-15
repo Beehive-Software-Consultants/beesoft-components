@@ -4,6 +4,7 @@ import ContentEditableInput from './components/form/inputs/content-editable-inpu
 import DateTime from './components/form/date-time/date-time.component';
 import FormattedInput from './components/form/inputs/formatted-input/formatted-input.component';
 import OverlayPanel from './components/overlay/overlay-panel/overlay-panel.component';
+import { MediaQuery } from './components/mobile/media-query/media-query.component.tsx';
 import { MobileOverlayPanel } from './components/mobile/overlay/mobile-overlay-panel.component.tsx';
 
 // functions
@@ -23,6 +24,7 @@ export {
   ContentEditableInput,
   DateTime,
   FormattedInput,
+  MediaQuery,
   MobileOverlayPanel,
   OverlayPanel,
   applyBeeSoftTheme,

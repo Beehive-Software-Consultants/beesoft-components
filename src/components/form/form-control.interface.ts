@@ -2,6 +2,7 @@ import React from 'react';
 
 export interface FormInputControl<V = unknown, C = undefined> {
   label?: string;
+  name?: string;
   value?: V;
   readOnly?: boolean;
   placeholder?: string;

@@ -88,7 +88,7 @@ export class DomHandler {
     };
   }
 
-  public static canPositionElementOnScreen(element: HTMLElement, target: HTMLElement) {
+  public static canPositionElementOnScreenWithTarget(element: HTMLElement, target: HTMLElement) {
     const screen = DomHandler.getScreenDimensions();
     const rectangle = element.getBoundingClientRect();
 
@@ -129,6 +129,13 @@ export class DomHandler {
       DomTargetPosition.TopRight
     );
     return topRight.left >= 0 && topRight.top >= 0;
+  }
+
+  public static canPositionElementOnScreen(element: HTMLElement) {
+    const screen = DomHandler.getScreenDimensions();
+    const rectangle = element.getBoundingClientRect();
+
+    return rectangle.width <= screen.width && rectangle.height <= screen.height;
   }
 
   public static positionElementToTargetOnScreen(

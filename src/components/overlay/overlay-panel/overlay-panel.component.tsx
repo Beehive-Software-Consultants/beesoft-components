@@ -90,7 +90,7 @@ const OverlayPanel = ({
         resizeObserver.current?.disconnect();
       }
     };
-  }, [shouldRemainOnScreen]);
+  }, []);
 
   useEffect(() => {
     if (target) {
@@ -133,7 +133,10 @@ const OverlayPanel = ({
       const offScreenLocation = DomHandler.determineOffScreenLocation(overlayRectangle);
 
       if (offScreenLocation) {
-        if (finalTarget.current && DomHandler.canPositionElementOnScreen(overlayElement, finalTarget.current)) {
+        if (
+          finalTarget.current &&
+          DomHandler.canPositionElementOnScreenWithTarget(overlayElement, finalTarget.current)
+        ) {
           const newDimensions = DomHandler.positionElementToTargetOnScreen(
             panelRef.current,
             finalTarget.current,
@@ -224,6 +227,10 @@ const OverlayPanel = ({
   };
 
   const onMarkupCreated = (element: HTMLElement) => {
+    if (shouldRemainOnScreen === true && panelRef.current) {
+      resizeObserver.current?.unobserve(panelRef.current);
+    }
+
     panelRef.current = element;
     markupCreated?.(element);
 
@@ -239,11 +246,14 @@ const OverlayPanel = ({
         ...position,
         width: finalTarget.current.offsetWidth,
       };
-    }
 
-    if (shouldRemainOnScreen === true) {
-      resizeObserver.current?.unobserve(panelRef.current);
-      resizeObserver.current?.observe(panelRef.current);
+      if (
+        shouldRemainOnScreen === true &&
+        (DomHandler.canPositionElementOnScreenWithTarget(panelRef.current, finalTarget.current) ||
+          DomHandler.canPositionElementOnScreen(panelRef.current))
+      ) {
+        resizeObserver.current?.observe(panelRef.current);
+      }
     }
   };
 

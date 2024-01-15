@@ -7,8 +7,8 @@ export default {
     colors: {
       transparent: 'transparent',
       current: 'currentColor',
-      white: 'white',
-      black: 'black',
+      white: 'var(--theme-bsc-white)',
+      black: 'var(--theme-bsc-black)',
       primary: {
         1: 'var(--theme-bsc-primary-1)',
         2: 'var(--theme-bsc-primary-2)',
@@ -40,7 +40,18 @@ export default {
       warning: 'var(--theme-bsc-warning)',
       error: 'var(--theme-bsc-error)',
     },
-    extend: {},
+    extend: {
+      keyframes: {
+        bounce: {
+          '50%': { transform: 'scale(1.2)' },
+          '75%': { transform: 'scale(0.9)' },
+          '100%': { transform: 'scale(1)' },
+        },
+      },
+      animation: {
+        bounce: 'bounce 0.4s linear forwards 0.2s',
+      },
+    },
   },
   plugins: [],
 };
