@@ -32,7 +32,7 @@ const CheckboxComponent = (props: CheckboxProps, ref: Ref<CheckboxRef>) => {
 
   useEffect(() => {
     setCheckedState({
-      checked: partial ? true : checkedState ? checkedState.checked : false,
+      checked: partial ? true : checkedState.checked,
       partial,
     });
   }, [partial]);
@@ -124,12 +124,12 @@ const CheckboxComponent = (props: CheckboxProps, ref: Ref<CheckboxRef>) => {
           id={id}
           name={name}
           type="checkbox"
-          checked={checkedState?.checked}
+          checked={checkedState.checked}
           onChange={handleChangeEvent}
           className={innerCheckboxStyles}
         />
         <svg viewBox="0 0 21 21" className={svgStyles}>
-          {!checkedState?.partial ? <polyline points="5 10.75 8.5 14.25 16 6" /> : <polyline points="6 10.5 16 10.5" />}
+          {!checkedState.partial ? <polyline points="5 10.75 8.5 14.25 16 6" /> : <polyline points="6 10.5 16 10.5" />}
         </svg>
       </label>
       {labelLocation === CheckboxLabelLocation.Right && (
