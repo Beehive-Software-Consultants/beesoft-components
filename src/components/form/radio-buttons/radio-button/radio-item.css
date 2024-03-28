@@ -1,0 +1,37 @@
+/****************************
+ * Not Dark
+ **/
+
+:not(.bsc-dark) :is(.bsc-radio-item, .bsc-radio-item-read-only) svg {
+  stroke-width: 1;
+  fill: none;
+}
+
+:not(.bsc-dark) .bsc-radio-item svg {
+  stroke: var(--theme-bsc-gray-2);
+}
+
+:not(.bsc-dark) .bsc-radio-item-read-only svg {
+  stroke: var(--theme-bsc-gray-4);
+}
+
+:not(.bsc-dark) .bsc-radio-item input:checked + svg circle {
+  fill: var(--theme-bsc-primary-1);
+}
+
+:not(.bsc-dark) .bsc-radio-item-read-only input:checked + svg circle {
+  fill: var(--theme-bsc-primary-4);
+}
+
+:not(.bsc-dark) :is(.bsc-radio-item, .bsc-radio-item-read-only) input + svg circle ~ circle {
+  display: none;
+}
+
+:not(.bsc-dark) :is(.bsc-radio-item, .bsc-radio-item-read-only) input:checked + svg circle ~ circle {
+  display: block;
+  fill: var(--theme-bsc-white);
+}
+
+.bsc-radio-item-animate input:checked + svg circle ~ circle {
+  @apply bsc-animate-bounce;
+}

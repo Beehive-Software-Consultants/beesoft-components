@@ -9,3 +9,8 @@ export interface GroupChangeEvent {
   name: string;
   value: TypeOrArray<unknown>;
 }
+
+export enum SelectionLabelLocation {
+  Right,
+  Left,
+}

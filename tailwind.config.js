@@ -49,7 +49,7 @@ export default {
         },
       },
       animation: {
-        bounce: 'bounce 0.4s linear forwards 0.2s',
+        bounce: 'bounce 0.4s ease-in-out forwards 0.2s',
       },
     },
   },

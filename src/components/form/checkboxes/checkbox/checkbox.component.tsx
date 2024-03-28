@@ -4,7 +4,8 @@ import { ChangeEvent, forwardRef, Ref, useEffect, useId, useImperativeHandle } f
 import { FocusRingStyle, useFocusRingStyle } from '../../../../common/hooks/style/use-focus-ring-style.ts';
 import { useShouldAnimate } from '../../../../common/hooks/use-animation.ts';
 import { Label } from '../../../common/label/label.component.tsx';
-import { CheckboxCheckState, CheckboxLabelLocation, CheckboxProps, CheckboxRef } from './checkbox.props.ts';
+import { SelectionLabelLocation } from '../../form-generic.interfaces.ts';
+import { CheckboxCheckState, CheckboxProps, CheckboxRef } from './checkbox.props.ts';
 
 const CheckboxComponent = (props: CheckboxProps, ref: Ref<CheckboxRef>) => {
   const {
@@ -14,7 +15,7 @@ const CheckboxComponent = (props: CheckboxProps, ref: Ref<CheckboxRef>) => {
     readOnly = false,
     checked = false,
     partial = false,
-    labelLocation = CheckboxLabelLocation.Right,
+    labelLocation = SelectionLabelLocation.Right,
     className,
     useAnimation,
     onChange,
@@ -93,8 +94,8 @@ const CheckboxComponent = (props: CheckboxProps, ref: Ref<CheckboxRef>) => {
   );
 
   const labelStyles = cx('bc-checkbox-label bsc-cursor-pointer', {
-    'bsc-ml-2': labelLocation === CheckboxLabelLocation.Right,
-    'bsc-mr-2': labelLocation === CheckboxLabelLocation.Left,
+    'bsc-ml-2': labelLocation === SelectionLabelLocation.Right,
+    'bsc-mr-2': labelLocation === SelectionLabelLocation.Left,
   });
 
   const focusStyles = useFocusRingStyle(FocusRingStyle.FocusWithin);
@@ -126,7 +127,7 @@ const CheckboxComponent = (props: CheckboxProps, ref: Ref<CheckboxRef>) => {
 
   return (
     <div className={wrapperStyles}>
-      {label && labelLocation === CheckboxLabelLocation.Left && (
+      {label && labelLocation === SelectionLabelLocation.Left && (
         <Label label={label} htmlFor={id} readOnly={readOnly} className={labelStyles} />
       )}
       <label className={checkboxStyles}>
@@ -146,7 +147,7 @@ const CheckboxComponent = (props: CheckboxProps, ref: Ref<CheckboxRef>) => {
           )}
         </svg>
       </label>
-      {label && labelLocation === CheckboxLabelLocation.Right && (
+      {label && labelLocation === SelectionLabelLocation.Right && (
         <Label label={label} htmlFor={id} readOnly={readOnly} className={labelStyles} />
       )}
     </div>

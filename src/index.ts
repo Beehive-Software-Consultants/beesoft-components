@@ -1,6 +1,10 @@
 // components
 import { BeeSoftProvider } from './common/contexts/beesoft.context.tsx';
-import { FormGroupItemOrientation, GroupChangeEvent } from './components/form/form-generic.interfaces.ts';
+import {
+  SelectionLabelLocation,
+  FormGroupItemOrientation,
+  GroupChangeEvent,
+} from './components/form/form-generic.interfaces.ts';
 import { Button } from './components/navigation/buttons/button/button.component.tsx';
 import { Checkbox } from './components/form/checkboxes/checkbox/checkbox.component.tsx';
 import { CheckboxGroup } from './components/form/checkboxes/checkbox-group/checkbox-group.component.tsx';
@@ -16,7 +20,7 @@ import { createBeeSoftTheme, applyBeeSoftTheme } from './components/common-funct
 
 // types
 import { CheckboxChangeEvent } from './components/form/checkboxes/checkboxes.interfaces.ts';
-import { CheckboxLabelLocation, CheckboxRef } from './components/form/checkboxes/checkbox/checkbox.props.ts';
+import { CheckboxRef } from './components/form/checkboxes/checkbox/checkbox.props.ts';
 import { DateFormatType, DateSelectionType } from './components/form/date-time/date-time-types';
 import { DateTimeInputTemplateProps } from './components/form/date-time/date-time.props.ts';
 import { DateTimeScrollerTemplateProps } from './components/form/date-time/date-time-scroller.component';
@@ -43,7 +47,7 @@ export {
 
   // types to be used as values
   FormGroupItemOrientation,
-  CheckboxLabelLocation,
+  SelectionLabelLocation,
   DateFormatType,
   DateSelectionType,
 };
